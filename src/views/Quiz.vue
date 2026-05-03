@@ -32,11 +32,46 @@ function selectOption(option) {
 }
 </script>
 <template>
-  <QuizHeader :questionHeader="questionHeader" :barPercentage="barPercentage" />
-  <QuizContent
-    :question="quiz.questions[currentQuestion]"
-    @selectOption="selectOption"
-    v-if="!showResult"
-  />
-  <QuizResult :correctAnswer="correctAnswer" :questionLength="quiz.questions.length" v-else />
+  <div v-if="quiz">
+    <QuizHeader :questionHeader="questionHeader" :barPercentage="barPercentage" />
+    <QuizContent
+      :question="quiz.questions[currentQuestion]"
+      @selectOption="selectOption"
+      v-if="!showResult"
+    />
+    <QuizResult :correctAnswer="correctAnswer" :questionLength="quiz.questions.length" v-else />
+  </div>
+
+  <div class="card" v-else>
+    <h1>Maaf</h1>
+    <p>Quiz Tidak Tersedia</p>
+  </div>
 </template>
+
+<style scoped>
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  width: 100%;
+  min-height: 80vh;
+  margin: 0 auto;
+}
+
+.card h1 {
+  font-size: 130px;
+}
+
+.card p {
+  font-size: 36px;
+}
+
+.card h1,
+.card p {
+  color: rgb(58, 58, 58);
+  margin: 0;
+  padding: 0;
+}
+</style>
