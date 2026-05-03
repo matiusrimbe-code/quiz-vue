@@ -1,9 +1,16 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
 const { quiz } = defineProps(['quiz'])
+const router = useRouter()
+
+function goToQuiz() {
+  router.push({ name: 'quiz', params: { id: quiz.id } })
+}
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="goToQuiz">
     <div class="card-header">
       <img :src="quiz.img" :alt="quiz.title" width="230px" />
     </div>
@@ -19,6 +26,11 @@ const { quiz } = defineProps(['quiz'])
   border: 1px solid #cfcfcf;
   border-radius: 20px;
   overflow: hidden;
+}
+
+.card:hover {
+  border: 2px solid #cfcfcf;
+  cursor: pointer;
 }
 
 .card-body {
